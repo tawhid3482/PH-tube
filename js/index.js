@@ -7,11 +7,11 @@ const loadCategories = async () => {
   const divContainer = document.getElementById('tab-container')
 
   course.forEach((categorie) => {
-    const divCreate = document.createElement('div')
-    divCreate.innerHTML = `
+      const divCreate = document.createElement('div')
+      divCreate.innerHTML = `
           <a onclick="handleClick('${categorie.category_id}')" class="tab bg-gray-400 hover:bg-orange-600 text-white">${categorie?.category}</a> 
       `
-    divContainer.appendChild(divCreate)
+      divContainer.appendChild(divCreate)
   })
 }
 
@@ -26,8 +26,8 @@ const handleClick = async (id) => {
   const data = await res.json()
   const cards = data.data
   if (cards.length === 0) {
-    const cardCreate = document.createElement('div')
-    cardCreate.innerHTML = `
+const cardCreate = document.createElement('div')
+cardCreate.innerHTML = `
 <div class="flex items-center justify-center mt-10">
 <div class="card w-96 bg-base-100 shadow-lg">
 <figure class="px-24 pt-10">
@@ -39,31 +39,31 @@ const handleClick = async (id) => {
 </div>
 </div>
 `
-    noDataContainer.appendChild(cardCreate)
-  }
+noDataContainer.appendChild(cardCreate)
+}
 
 
   cards.forEach((card) => {
-    const cardCreate = document.createElement('div')
-    const seconds = card?.others?.posted_date
-    const time = secondsToHoursAndMinutes(seconds)
-    let finalTime = '';
+      const cardCreate = document.createElement('div')
+      const seconds = card?.others?.posted_date
+      const time = secondsToHoursAndMinutes(seconds)
+      let finalTime = '';
 
-    if (time.hours > 0) {
-      finalTime = `${time.hours}hrs`;
-      if (time.minutes > 0) {
-        finalTime += ` ${time.minutes}min`;
+      if (time.hours > 0) {
+          finalTime = `${time.hours}hrs`;
+          if (time.minutes > 0) {
+              finalTime += ` ${time.minutes}min`;
+          }
+          finalTime += ' ago';
+      } else if (time.minutes > 0) {
+          finalTime = `${time.minutes}min ago`;
       }
-      finalTime += ' ago';
-    } else if (time.minutes > 0) {
-      finalTime = `${time.minutes}min ago`;
-    }
 
-    if (time.hours === 0 && time.minutes === 0) {
-      finalTime = '';
-    }
+      if (time.hours === 0 && time.minutes === 0) {
+          finalTime = '';
+      }
 
-    cardCreate.innerHTML = `
+      cardCreate.innerHTML = `
           <div class="card w-72 p-4 bg-base-100 shadow-xl">
               <figure><img class="relative h-52" src="${card?.thumbnail}" alt="" />
               <p class="absolute pl-32 text-white pt-36">${finalTime}</p>
@@ -93,7 +93,7 @@ const handleClick = async (id) => {
               <p class="text-center "> ${card?.others?.views} views</p>
           </div>
       `;
-    cardContainer.appendChild(cardCreate);
+      cardContainer.appendChild(cardCreate);
   });
 }
 
@@ -102,14 +102,14 @@ const sortByView = () => {
   const cards = Array.from(cardContainer.querySelectorAll('.card'));
 
   cards.sort((a, b) => {
-    const viewA = parseInt(a.querySelector('.text-center').textContent);
-    const viewB = parseInt(b.querySelector('.text-center').textContent);
-    return viewB - viewA;
+      const viewA = parseInt(a.querySelector('.text-center').textContent);
+      const viewB = parseInt(b.querySelector('.text-center').textContent);
+      return viewB - viewA;
   });
 
   cardContainer.innerHTML = '';
   cards.forEach((card) => {
-    cardContainer.appendChild(card);
+      cardContainer.appendChild(card);
   });
 }
 
@@ -126,7 +126,7 @@ function secondsToHoursAndMinutes(seconds) {
   const minutes = Math.floor(remainingSeconds / 60);
 
   return {
-    hours,
-    minutes,
+      hours,
+      minutes,
   };
 }
