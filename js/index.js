@@ -9,7 +9,6 @@ const loadCategories = async () => {
 
   // divContainer.textContent = '';
   course.forEach((categorie) => {
-
     const divCreate = document.createElement('div')
     divCreate.innerHTML = `
         <a onclick="handleClick('${categorie.category_id}')" class="tab bg-gray-400 hover:bg-orange-600 text-white">${categorie?.category}</a> 
@@ -17,7 +16,6 @@ const loadCategories = async () => {
     divContainer.appendChild(divCreate)
 
   })
-
 }
 
 const handleClick = async (id) => {
@@ -27,8 +25,8 @@ const handleClick = async (id) => {
   noDataContainer.textContent = '';
   const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
   const data = await res.json()
+  // console.log(data)
   const cards = data.data
-  // console.log(cards)
   if (cards.length === 0) {
     const cardCreate = document.createElement('div')
     cardCreate.innerHTML = `
@@ -47,12 +45,32 @@ const handleClick = async (id) => {
   }
 
   cards.forEach((card) => {
-
+console.log(card)
     const cardCreate = document.createElement('div')
+    const seconds = card?.others?.posted_date
+    const time = secondsToHoursAndMinutes(seconds); 
+    if (time.hours > 0) {
+        formattedTime = `${time.hours}hrs`;
+        if (time.minutes > 0) {
+            formattedTime += ` ${time.minutes}min`;
+        }
+        formattedTime += ' ago';
+    }
+    else if (time.minutes > 0) {
+        formattedTime = `${time.minutes}min ago`;
+    }
+    // Check if both hours and minutes are 0 before displaying the time
+    if (time.hours === 0 && time.minutes === 0) {
+        formattedTime = '';
+    }
     cardCreate.innerHTML = `
         
         <div class="card w-72 p-4 bg-base-100 shadow-xl">
-        <figure><img class="h-52" src="${card?.thumbnail}" alt="Shoes" /></figure>
+        <figure><img class="relative h-52" src="${card?.thumbnail}" alt="" />
+        <p class="absolute pl-32 text-white pt-36">
+        ${formattedTime}
+        </p>
+        </figure>
         <div class="">
           <div class="card-footer flex justify-between mt-8">
             <div class="flex items-center gap-3 ">
@@ -78,7 +96,6 @@ const handleClick = async (id) => {
             <p class="text-center "> ${card?.others?.views} views</p>
         </div>
       </div>
-        
         `
     cardContainer.appendChild(cardCreate)
   })
@@ -91,7 +108,27 @@ handleClick('1000')
 const blog = () => {
   window.location.href = 'blog.html'
 }
+function secondsToHoursAndMinutes(seconds) {
 
-const shotByview = () => {
+  const hours = Math.floor(seconds / 3600);
 
+  const remainingSeconds = seconds % 3600;
+
+  const minutes = Math.floor(remainingSeconds / 60);
+
+  return {
+    hours,
+    minutes,
+  };
 }
+// const shotByview = async(id) => {
+ 
+//   const cardContainer = document.getElementById('card-container')
+//   cardContainer.textContent = '';
+//   const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
+//   const sortring = await res.json()
+
+//   console.log(sortring.data)
+// }
+
+
