@@ -116,7 +116,8 @@ loadCategories();
 handleClick('1000');
 
 const blog = () => {
-    window.location.href = 'blog.html';
+    const newTab = 'blog.html'
+    window.open(newTab,'_blank')
 }
 
 function hoursAndMinutes(seconds) {
