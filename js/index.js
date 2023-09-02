@@ -42,9 +42,9 @@ const handleClick = async (id) => {
         noDataContainer.appendChild(cardCreate)
     }
 
-    cards.forEach((card) => {
+    cards.forEach((category) => {
         const cardCreate = document.createElement('div')
-        const seconds = card?.others?.posted_date
+        const seconds = category?.others?.posted_date
         const time = hoursAndMinutes(seconds)
         let finalTime = '';
 
@@ -64,7 +64,7 @@ const handleClick = async (id) => {
         }
         cardCreate.innerHTML = `
           <div class="card w-72 p-4 bg-base-100 shadow-xl">
-              <figure class="relative"><img class=" h-52" src="${card?.thumbnail}" alt="" />
+              <figure class="relative"><img class=" h-52" src="${category?.thumbnail}" alt="" />
               <span class="absolute text-white right-4 bottom-2 bg-slate-900 px-1">${finalTime}</span>
               </figure>
               <div class="">
@@ -73,42 +73,42 @@ const handleClick = async (id) => {
                           <div class="p-0">
                               <div class="avatar">
                                   <div class="w-12 rounded-full">
-                                      <img src="${card?.authors[0]?.profile_picture}" />
+                                      <img src="${category?.authors[0]?.profile_picture}" />
                                   </div>
                               </div>
                           </div>
                           <div class="flex gap-4 mb-0">
-                              <h1 class="text-lg font-medium">${card?.title}</h1>
+                              <h1 class="text-lg font-medium">${category?.title}</h1>
                           </div>
                       </div>
                   </div>
               </div>
               <div class="flex justify-center gap-1 items-center">
-                  <h2>${card?.authors[0]?.profile_name}</h2>
+                  <h2>${category?.authors[0]?.profile_name}</h2>
                   <span>
-                      ${card?.authors[0]?.verified ? '<img class="w-5" src="./image/fi_10629607.png">' : ' '}
+                      ${category?.authors[0]?.verified ? '<img class="w-5" src="./image/fi_10629607.png">' : ' '}
                   </span>
               </div>
-              <p class="view text-center "> ${card?.others?.views} views</p>
+              <p class="view text-center "> ${category?.others?.views} views</p>
           </div>
       `;
         cardContainer.appendChild(cardCreate);
     });
 }
 
-const sortByView = () => {
+const sortByViewOption = () => {
     const cardContainer = document.getElementById('card-container');
     const cards = Array.from(cardContainer.querySelectorAll('.card'));
 
-    cards.sort((a, b) => {
-        const viewA = parseInt(a.querySelector('.view').textContent);
-        const viewB = parseInt(b.querySelector('.view').textContent);
-        return viewB - viewA;
+    cards.sort((A, B) => {
+        const viewAoption = parseInt(A.querySelector('.view').textContent);
+        const viewBoption = parseInt(B.querySelector('.view').textContent);
+        return viewBoption - viewAoption;
     });
 
     cardContainer.textContent = '';
-    cards.forEach((card) => {
-        cardContainer.appendChild(card);
+    cards.forEach((category) => {
+        cardContainer.appendChild(category);
     });
 }
 
