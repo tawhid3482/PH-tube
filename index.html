@@ -7,8 +7,8 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
 
+</head>
 <body class="container mx-auto">
     <header>
         <!-- navbar  -->
@@ -17,10 +17,10 @@
                 <img src="./image/Logo.png" alt="">
             </div>
             <div class="navbar-center">
-                <a onclick="sortByView()" class="btn ">Sort by view</a>
+                <a onclick="sortByView()" class="btn  hover:bg-orange-600 hover:text-white ">Sort by view</a>
             </div>
             <div class="navbar-end">
-                <a onclick="blog()" class="btn bg-orange-600 text-white">Blog</a>
+                <a onclick="blog()" class="btn bg-orange-600 text-white hover:bg-gray-500 hover:text-white">Blog</a>
             </div>
         </div>
     </header>
@@ -35,7 +35,7 @@
             <div id="card-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
 
             </div>
-            
+
             <div id="nodata-container" class="">
 
             </div>
@@ -43,5 +43,4 @@
     </main>
     <script src="./js/index.js"></script>
 </body>
-
 </html>
