@@ -64,8 +64,8 @@ const handleClick = async (id) => {
         }
         cardCreate.innerHTML = `
           <div class="card w-72 p-4 bg-base-100 shadow-xl">
-              <figure><img class="relative h-52" src="${card?.thumbnail}" alt="" />
-              <p class="absolute pl-32 text-white pt-36">${finalTime}</p>
+              <figure class="relative"><img class=" h-52" src="${card?.thumbnail}" alt="" />
+              <span class="absolute text-white right-4 bottom-2 bg-slate-900 px-1">${finalTime}</span>
               </figure>
               <div class="">
                   <div class="card-footer flex justify-between mt-8">
